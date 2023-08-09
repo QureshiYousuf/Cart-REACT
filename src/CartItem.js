@@ -26,8 +26,32 @@ class CartItem extends React.Component {
         }
     }
 
+    // using arrow func value of 'this' will be binded to the increaseQuantity function
     increaseQuantity = () => {
-        console.log('this', this.state);
+        console.log('this', this.state.qty);
+        // setState form 1(object form)
+        // this.setState({
+        //     title: 'sometitle'
+        // });
+
+        // setState form 2(func form) - if prevState required use this
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty + 1
+            }
+        });
+    }
+
+    decreaseQuantity = () => {
+        const {qty} = this.state;
+        if(qty == 0) {
+            return;
+        }
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty - 1
+            }
+        });
     }
 
     render() {
@@ -45,7 +69,7 @@ class CartItem extends React.Component {
                     <div className="cart-item-actions">
                         {/* Buttons */}
                         <h4 className="action-icons" onClick={this.increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></h4>
-                        <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-square-minus" /></h4>
+                        <h4 className="action-icons" onClick={this.decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-square-minus" /></h4>
                         <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-trash" /></h4>
                     </div>
                 </div>
