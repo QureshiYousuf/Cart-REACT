@@ -26,6 +26,10 @@ class CartItem extends React.Component {
         }
     }
 
+    increaseQuantity = () => {
+        console.log('this', this.state);
+    }
+
     render() {
         // object destructuring
         const {title, price, qty} = this.state;
@@ -40,7 +44,7 @@ class CartItem extends React.Component {
                     <div style={{fontSize: 15, color: "grey"}}> {qty} </div>
                     <div className="cart-item-actions">
                         {/* Buttons */}
-                        <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></h4>
+                        <h4 className="action-icons" onClick={this.increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></h4>
                         <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-square-minus" /></h4>
                         <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-trash" /></h4>
                     </div>
