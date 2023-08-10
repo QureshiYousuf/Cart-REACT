@@ -16,47 +16,19 @@ library.add(fas, faTwitter, faFontAwesome);
 
 class CartItem extends React.Component {
 
-    constructor () {
-        super();
-        this.state = {
-            title: 'IPhone',
-            price: 999,
-            qty: 1,
-            img: ''
-        }
-    }
-
     // using arrow func value of 'this' will be binded to the increaseQuantity function
-    increaseQuantity = () => {
-        console.log('this', this.state.qty);
-        // setState form 1(object form)
-        // this.setState({
-        //     title: 'sometitle'
-        // });
+ 
 
-        // setState form 2(func form) - if prevState required use this
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty + 1
-            }
-        });
-    }
-
-    decreaseQuantity = () => {
-        const {qty} = this.state;
-        if(qty == 0) {
-            return;
-        }
-        this.setState((prevState) => {
-            return {
-                qty: prevState.qty - 1
-            }
-        });
-    }
 
     render() {
         // object destructuring
-        const {title, price, qty} = this.state;
+        const {title, price, qty} = this.props.product;
+        const {
+                product, 
+                handleIncreaseQuantity, 
+                handleDecreaseQuantity, 
+                handleDeleteProduct
+            } = this.props;
         return (
             <div className="cart-item">
                 <div className="left-block">
@@ -68,9 +40,9 @@ class CartItem extends React.Component {
                     <div style={{fontSize: 15, color: "grey"}}> {qty} </div>
                     <div className="cart-item-actions">
                         {/* Buttons */}
-                        <h4 className="action-icons" onClick={this.increaseQuantity}><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></h4>
-                        <h4 className="action-icons" onClick={this.decreaseQuantity}><FontAwesomeIcon icon="fa-solid fa-square-minus" /></h4>
-                        <h4 className="action-icons"><FontAwesomeIcon icon="fa-solid fa-trash" /></h4>
+                        <h4 className="action-icons" onClick={() => handleIncreaseQuantity(product)}><FontAwesomeIcon icon="fa-solid fa-cart-plus" /></h4>
+                        <h4 className="action-icons" onClick={() => handleDecreaseQuantity(product)}><FontAwesomeIcon icon="fa-solid fa-square-minus" /></h4>
+                        <h4 className="action-icons" onClick={() => handleDeleteProduct(product.id)}><FontAwesomeIcon icon="fa-solid fa-trash" /></h4>
                     </div>
                 </div>
             </div>
